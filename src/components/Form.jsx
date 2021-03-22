@@ -1,9 +1,40 @@
 import React, { Component } from 'react';
 
 class Form extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      errorMsg: false
+    }
+  }
+
+  setErrorMsg() {
+    this.setState({ errorMsg: !!this.setErrorMsg})
+  }
+
+  verifyLocationInputs(data) {
+    // check if user inputs are valid entries
+    // if yes return true, otherwise set error message
+    const isNameValid = /^[a-zA-Z'.\s-]{1,25}$/g.test(data.name)
+    const isLatValid = (data.lat !== '') && isFinite(data.lat) && Math.abs(data.lat) <= 90
+    const isLngValid = (data.lng !== '') && isFinite(data.lng) && Math.abs(data.lng) <= 180;
+  
+    if (isNameValid && isLatValid && isLngValid) {
+      return true
+    } else {
+      this.setErrorMsg()
+    }
+  }
+
   submitForm(e, data) {
     e.preventDefault();
-    this.props.saveLocation(data);
+    // reset error message
+    this.setErrorMsg()
+    if (this.verifyLocationInputs(data)) {
+        // verify that coordinates are valid
+        // if true, save location
+      this.props.saveLocation(data);
+    }
   }
 
   render() {
