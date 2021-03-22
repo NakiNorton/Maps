@@ -8,8 +8,8 @@ class Form extends Component {
     }
   }
 
-  setErrorMsg() {
-    this.setState({ errorMsg: !!this.setErrorMsg})
+  setErrorMsg(val) {
+    this.setState({ errorMsg: val})
   }
 
   verifyLocationInputs(data) {
@@ -22,14 +22,14 @@ class Form extends Component {
     if (isNameValid && isLatValid && isLngValid) {
       return true
     } else {
-      this.setErrorMsg()
+      this.setErrorMsg(true)
     }
   }
 
   submitForm(e, data) {
     e.preventDefault();
     // reset error message
-    this.setErrorMsg()
+    this.setErrorMsg(false)
     if (this.verifyLocationInputs(data)) {
         // verify that coordinates are valid
         // if true, save location
