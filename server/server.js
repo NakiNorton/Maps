@@ -43,3 +43,32 @@ const portNumber = process.env.PORT || 3001;
 app.listen(portNumber, () => {
   console.log('RrrarrrrRrrrr server alive on port 3001');
 });
+
+
+const verifyLocationData = (newLocation) => {
+  const isNameValid = /^[a-zA-Z'.\s-]{1,25}$/g.test(newLocation.name)
+  const isLatValid = (newLocation.lat !== '') && isFinite(newLocation.lat) && Math.abs(newLocation.lat) <= 90
+  const isLngValid = (newLocation.lng !== '') && isFinite(newLocation.lng) && Math.abs(newLocation.lng) <= 180;
+
+  if (isNameValid && isLatValid && isLngValid) {
+    return true
+  } else {
+    return false
+  }
+}
+
+app.post('/locations', (req, res) => {
+  const newLocation = req.body;
+  if (!verifyLocationData(newLocation)) {
+    return res.status(422).send({ message: 'Invalid data in request'});
+  } else {
+    if (app.locals.locations.length === 0) {
+      newLocation.id = 1;
+    } else {
+      let length = app.locals.locations.length
+      newLocation.id = `id${++length}`
+    }
+    app.locals.locations.push(newLocation);
+    return res.status(201).json(newLocation);
+  }
+});

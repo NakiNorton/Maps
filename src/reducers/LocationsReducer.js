@@ -8,6 +8,9 @@ const Locations = (state = initialState, action) => {
       return Object.assign({}, state, {
         data: state.data.concat(action.data),
       });
+    case 'SAVE_LOCATION':
+      const updatedLocations = { ...state, data: state.data.concat(action.data) }
+      return updatedLocations
     default:
       return state;
   }
