@@ -7,16 +7,26 @@ class LeafletMap extends Component {
     super(props)
     this.state = {
       defaultCenter: [39.750809, -104.996810],
-      polygonMarkers: [
-        [39.750809, -104.996810],
-        [45.750809, -114.996810],
-        [47.750809, -124.996810]
-      ]
+      polygon: []
+
     };
+  }
+
+  updatePolygon = (coordinates) => {
+    const { postPolygonCoordinates} = this.props
+    if (!this.state.polygon.includes(coordinates)) {
+      this.setState({
+        polygon: [...this.state.polygon, coordinates]
+      }, () => postPolygonCoordinates(this.state.polygon))
+    } else {
+      let filteredList =  this.state.polygon.filter(marker => marker !== coordinates)
+      this.setState({ polygon: filteredList }, () => postPolygonCoordinates(filteredList))
+    }
   }
  
   getMapCenter() {
     const { locations } = this.props
+    // assuming that we're always starting off with 3 locations
     if (locations.length > 3) {
       const newLocation = locations.slice(-1)[0]
       return [newLocation.lat, newLocation.lng]
@@ -24,6 +34,7 @@ class LeafletMap extends Component {
       return this.state.defaultCenter
     }
   }
+
 
   render() {
     return (
@@ -44,8 +55,8 @@ class LeafletMap extends Component {
           <ZoomControl
             position="bottomright"
           />
-          <AllMarkers />
-          <Polygon positions={this.state.polygonMarkers}/>
+          <AllMarkers updatePolygon={this.updatePolygon}/>
+          <Polygon positions={this.props.polygonMarkers} />
         </Map>
       </div>
     );
