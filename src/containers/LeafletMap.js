@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, ZoomControl } from 'react-leaflet';
+import { Map, TileLayer, ZoomControl, Polygon } from 'react-leaflet';
 import AllMarkers from './AllMarkers'
 
 class LeafletMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      defaultCenter: [39.750809, -104.996810]
+      defaultCenter: [39.750809, -104.996810],
+      polygonMarkers: [
+        [39.750809, -104.996810],
+        [45.750809, -114.996810],
+        [47.750809, -124.996810]
+      ]
     };
   }
  
@@ -40,6 +45,7 @@ class LeafletMap extends Component {
             position="bottomright"
           />
           <AllMarkers />
+          <Polygon positions={this.state.polygonMarkers}/>
         </Map>
       </div>
     );
