@@ -8,12 +8,13 @@ class App extends Component {
   }
   getLocations() {
     this.props.fetchAllLocations();
+    this.props.fetchPolygonCoordinates();
   }
   render() {
     return (
       <div className="App">
         <FormContainer />
-        <LeafletMap locations={this.props.locations} />
+        <LeafletMap locations={this.props.locations} polygonMarkers={this.props.polygonMarkers} />
       </div>
     );
   }
