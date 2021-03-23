@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 import MapMarker from './Marker';
 
 class AllMarkers extends PureComponent {
-  handleClick = (location) => {
-    console.log("click", location)
+  handleClick = (coordinates) => {
+    const { updatePolygon } = this.props;
+    updatePolygon(coordinates)
   }
  
   render() {
