@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import '../style/App.css';
-import { fetchAllLocations, fetchPolygonCoordinates } from '../actions/locationActions';
+import { fetchAllLocations, fetchPolygonCoordinates, postPolygonCoordinates } from '../actions/locationActions';
 import App from '../components/App';
 
 const mapStateToProps = state => {
@@ -9,7 +9,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchAllLocations, fetchPolygonCoordinates }, dispatch);
+  return bindActionCreators({ fetchAllLocations, fetchPolygonCoordinates, postPolygonCoordinates }, dispatch);
 };
 
 export default connect(

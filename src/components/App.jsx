@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         <FormContainer />
-        <LeafletMap locations={this.props.locations} polygonMarkers={this.props.polygonMarkers} />
+        <LeafletMap locations={this.props.locations} polygonMarkers={this.props.polygonMarkers} postPolygonCoordinates={this.props.postPolygonCoordinates}/>
       </div>
     );
   }
