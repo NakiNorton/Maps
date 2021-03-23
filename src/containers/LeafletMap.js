@@ -8,33 +8,31 @@ class LeafletMap extends Component {
     this.state = {
       defaultCenter: [39.750809, -104.996810],
       polygon: []
-
     };
   }
 
-  updatePolygon = (coordinates) => {
-    const { postPolygonCoordinates} = this.props
-    if (!this.state.polygon.includes(coordinates)) {
-      this.setState({
-        polygon: [...this.state.polygon, coordinates]
-      }, () => postPolygonCoordinates(this.state.polygon))
+  updatePolygon = (markers) => {
+    const { postPolygonCoordinates } = this.props
+    
+    if (!this.state.polygon.includes(markers)) {
+      this.setState({ polygon: [...this.state.polygon, markers]}, () => postPolygonCoordinates(this.state.polygon))
     } else {
-      let filteredList =  this.state.polygon.filter(marker => marker !== coordinates)
-      this.setState({ polygon: filteredList }, () => postPolygonCoordinates(filteredList))
+      const filteredList = this.state.polygon.filter(marker => marker !== markers)
+      this.setState({ polygon: filteredList}, () => postPolygonCoordinates(filteredList))
     }
   }
  
   getMapCenter() {
     const { locations } = this.props
     // assuming that we're always starting off with 3 locations
+    // make this dynamic & future proof(?)
     if (locations.length > 3) {
-      const newLocation = locations.slice(-1)[0]
-      return [newLocation.lat, newLocation.lng]
+      const newCenter = locations.slice(-1)[0]
+      return [newCenter.lat, newCenter.lng]
     } else {
       return this.state.defaultCenter
     }
   }
-
 
   render() {
     return (
