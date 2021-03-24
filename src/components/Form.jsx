@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { postNewLocation } from '../Helpers/apiCalls';
 
 class Form extends Component {
   constructor(props) {
@@ -13,24 +12,9 @@ class Form extends Component {
     this.setState({ errorMsg: val})
   }
 
-  /* FRONT-END INPUT VERIFICATION
-  verifyLocationInputs(data) {
-    const isNameValid = /^[a-zA-Z'.\s-]{1,25}$/g.test(data.name)
-    const isLatValid = (data.lat !== '') && isFinite(data.lat) && Math.abs(data.lat) <= 90
-    const isLngValid = (data.lng !== '') && isFinite(data.lng) && Math.abs(data.lng) <= 180;
-  
-    if (isNameValid && isLatValid && isLngValid) {
-      return true
-    } else {
-      this.setErrorMsg(true)
-    }
-  }
-*/
-
-  verifyNewLocation = async (newLocation) => {
-    postNewLocation(newLocation)
-      .then(validLocation => this.props.saveLocation(validLocation))
-      .catch(err => this.setErrorMsg(true))
+  verifyNewLocation = (newLocation) => {
+    this.props.postNewLocation(newLocation)
+      .catch(() => this.setErrorMsg(true))
   }
 
   submitForm(e, data) {
@@ -38,7 +22,6 @@ class Form extends Component {
     this.setErrorMsg(false)
     this.verifyNewLocation(data)
   }
-
 
   render() {
     return (
