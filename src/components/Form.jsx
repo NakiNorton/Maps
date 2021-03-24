@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { postNewLocation } from '../Helpers/apiCalls';
 
 class Form extends Component {
   constructor(props) {
@@ -13,24 +12,9 @@ class Form extends Component {
     this.setState({ errorMsg: val})
   }
 
-  /* FRONT-END INPUT VERIFICATION
-  verifyLocationInputs(data) {
-    const isNameValid = /^[a-zA-Z'.\s-]{1,25}$/g.test(data.name)
-    const isLatValid = (data.lat !== '') && isFinite(data.lat) && Math.abs(data.lat) <= 90
-    const isLngValid = (data.lng !== '') && isFinite(data.lng) && Math.abs(data.lng) <= 180;
-  
-    if (isNameValid && isLatValid && isLngValid) {
-      return true
-    } else {
-      this.setErrorMsg(true)
-    }
-  }
-*/
-
-  verifyNewLocation = async (newLocation) => {
-    postNewLocation(newLocation)
-      .then(validLocation => this.props.saveLocation(validLocation))
-      .catch(err => this.setErrorMsg(true))
+  verifyNewLocation = (newLocation) => {
+    this.props.postNewLocation(newLocation)
+      .catch(() => this.setErrorMsg(true))
   }
 
   submitForm(e, data) {
@@ -38,7 +22,6 @@ class Form extends Component {
     this.setErrorMsg(false)
     this.verifyNewLocation(data)
   }
-
 
   render() {
     return (
@@ -74,13 +57,13 @@ class Form extends Component {
             Save
           </button>
           {this.state.errorMsg &&
-          <section style={{ textAlign: 'left' }}> 
-            <p style={{ padding: '.25rem 1rem' }}>
-              <span style={{ color: 'red' }}>Sorry! Something went wrong.</span><br/><br/>Please make sure the name and coordinates are valid:
+          <section style={{ textAlign: 'left', padding: '1.25rem' }}>
+            <p>
+              <span style={{ color: 'red' }}>Sorry! This location couldn't be saved.</span><br/><br/>Please check the requirements below and try again.
             </p>
             <ul>
               <li>
-                <b>Name</b> needs to be between 1-25 characters, and only include letters, apostrophees, periods & hyphens.
+                <b>Name</b> must have at least one character.
               </li>
               <li>
                 <b>Latitude</b> must be a number between -90 & 90 (inclusive).

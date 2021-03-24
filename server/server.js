@@ -6,6 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Initial data
 const initialLocations = [
   {
     id: 'id1',
@@ -27,37 +28,20 @@ const initialLocations = [
   },
 ];
 
+const initialPolygonMarkers = []
+
 app.locals.idIndex = 3;
 app.locals.locations = initialLocations;
-
-app.get('/locations', (req, res) => res.send({ locations: app.locals.locations }));
-
-
-// Fetch polygon coordinates
-const initialPolygonMarkers = []
 app.locals.polygonMarkers = initialPolygonMarkers
+
+// GET requests
+app.get('/locations', (req, res) => res.send({ locations: app.locals.locations }));
 
 app.get('/polygon-coordinates', (req, res) => res.send({ polygonMarkers: app.locals.polygonMarkers }));
 
-
-
-
-
-app.use(express.static(path.resolve(__dirname, '..', 'build')));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
-});
-
-const portNumber = process.env.PORT || 3001;
-
-app.listen(portNumber, () => {
-  console.log('RrrarrrrRrrrr server alive on port 3001');
-});
-
-
+// POST helper function
 const verifyLocationData = (newLocation) => {
-  const isNameValid = /^[a-zA-Z'.\s-]{1,25}$/g.test(newLocation.name)
+  const isNameValid = (newLocation.length >= 1)
   const isLatValid = (newLocation.lat !== '') && isFinite(newLocation.lat) && Math.abs(newLocation.lat) <= 90
   const isLngValid = (newLocation.lng !== '') && isFinite(newLocation.lng) && Math.abs(newLocation.lng) <= 180;
 
@@ -68,6 +52,7 @@ const verifyLocationData = (newLocation) => {
   }
 }
 
+// POST requests
 app.post('/locations', (req, res) => {
   const newLocation = req.body;
   if (!verifyLocationData(newLocation)) {
@@ -85,8 +70,20 @@ app.post('/locations', (req, res) => {
 });
 
 app.post('/polygon-coordinates', (req, res) => {
-  console.log(req.body)
   const newPolygonCoordinates = req.body;
   app.locals.polygonMarkers = newPolygonCoordinates
   res.send({ polygonMarkers: app.locals.polygonMarkers })
+});
+
+
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+});
+
+const portNumber = process.env.PORT || 3001;
+
+app.listen(portNumber, () => {
+  console.log('RrrarrrrRrrrr server alive on port 3001');
 });
