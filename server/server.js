@@ -32,6 +32,17 @@ app.locals.locations = initialLocations;
 
 app.get('/locations', (req, res) => res.send({ locations: app.locals.locations }));
 
+
+// Fetch polygon coordinates
+const initialPolygonMarkers = []
+app.locals.polygonMarkers = initialPolygonMarkers
+
+app.get('/polygon-coordinates', (req, res) => res.send({ polygonMarkers: app.locals.polygonMarkers }));
+
+
+
+
+
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 app.get('/', (req, res) => {
@@ -71,4 +82,11 @@ app.post('/locations', (req, res) => {
     app.locals.locations.push(newLocation);
     return res.status(201).json(newLocation);
   }
+});
+
+app.post('/polygon-coordinates', (req, res) => {
+  console.log(req.body)
+  const newPolygonCoordinates = req.body;
+  app.locals.polygonMarkers = newPolygonCoordinates
+  res.send({ polygonMarkers: app.locals.polygonMarkers })
 });

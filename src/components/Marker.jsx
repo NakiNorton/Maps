@@ -12,7 +12,7 @@ class MapMarker extends PureComponent {
 
     return (
       <div className="marker-container">
-        <Marker position={this.props.location} icon={icon}>
+        <Marker position={this.props.location} icon={icon} onClick={() => this.props.handleClick(this.props.location)}>
           <Tooltip sticky interactive>
             <div>
               <h4>{this.props.name}</h4>

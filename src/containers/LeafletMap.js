@@ -1,20 +1,34 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, ZoomControl } from 'react-leaflet';
+import { Map, TileLayer, ZoomControl, Polygon } from 'react-leaflet';
 import AllMarkers from './AllMarkers'
 
 class LeafletMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      defaultCenter: [39.750809, -104.996810]
+      defaultCenter: [39.750809, -104.996810],
+      polygon: []
     };
+  }
+
+  updatePolygon = (markers) => {
+    const { postPolygonCoordinates } = this.props
+    
+    if (!this.state.polygon.includes(markers)) {
+      this.setState({ polygon: [...this.state.polygon, markers]}, () => postPolygonCoordinates(this.state.polygon))
+    } else {
+      const filteredList = this.state.polygon.filter(marker => marker !== markers)
+      this.setState({ polygon: filteredList}, () => postPolygonCoordinates(filteredList))
+    }
   }
  
   getMapCenter() {
     const { locations } = this.props
+    // assuming that we're always starting off with 3 locations
+    // make this dynamic & future proof(?)
     if (locations.length > 3) {
-      const newLocation = locations.slice(-1)[0]
-      return [newLocation.lat, newLocation.lng]
+      const newCenter = locations.slice(-1)[0]
+      return [newCenter.lat, newCenter.lng]
     } else {
       return this.state.defaultCenter
     }
@@ -39,7 +53,8 @@ class LeafletMap extends Component {
           <ZoomControl
             position="bottomright"
           />
-          <AllMarkers />
+          <AllMarkers updatePolygon={this.updatePolygon}/>
+          <Polygon positions={this.props.polygonMarkers} />
         </Map>
       </div>
     );

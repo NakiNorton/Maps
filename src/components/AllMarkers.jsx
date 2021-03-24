@@ -2,6 +2,11 @@ import React, { PureComponent } from 'react';
 import MapMarker from './Marker';
 
 class AllMarkers extends PureComponent {
+  handleClick = (coordinates) => {
+    const { updatePolygon } = this.props;
+    updatePolygon(coordinates)
+  }
+ 
   render() {
     const { locations } = this.props;
     const markerArray = locations.map((marker, i) => {
@@ -10,6 +15,7 @@ class AllMarkers extends PureComponent {
           key={i}
           location={[+marker.lat, +marker.lng]}
           name={marker.name}
+          handleClick={this.handleClick}
         />
       );
     });
