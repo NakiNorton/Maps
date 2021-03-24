@@ -57,13 +57,13 @@ class Form extends Component {
             Save
           </button>
           {this.state.errorMsg &&
-          <section style={{ textAlign: 'left' }}> 
-            <p style={{ padding: '.25rem 1rem' }}>
-              <span style={{ color: 'red' }}>Sorry! Something went wrong.</span><br/><br/>Please make sure the name and coordinates are valid:
+          <section style={{ textAlign: 'left', padding: '1.25rem' }}>
+            <p>
+              <span style={{ color: 'red' }}>Sorry! This location couldn't be saved.</span><br/><br/>Please check the requirements below and try again.
             </p>
             <ul>
               <li>
-                <b>Name</b> needs to be between 1-25 characters, and only include letters, apostrophees, periods & hyphens.
+                <b>Name</b> must have at least one character.
               </li>
               <li>
                 <b>Latitude</b> must be a number between -90 & 90 (inclusive).
