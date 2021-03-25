@@ -63,7 +63,7 @@ class Form extends Component {
               <p>Please make sure that the name and coordinates meet the requirements below:
               </p>
               <ul>
-                <li><b>Name</b> must have at least one character.</li>
+                <li><b>Name</b> must be between 1-25 characters & can contain letters, periods, apostrophees & hyphens.</li>
                 <li><b>Latitude</b> must be a number between -90 & 90 (inclusive), no special characters, symbols or letters.</li>
                 <li><b>Longitude</b> must be a number between -180 & 180 degrees (inclusive), no special characters, symbols or letters.</li>
               </ul>
