@@ -57,22 +57,17 @@ class Form extends Component {
             Save
           </button>
           {this.state.errorMsg &&
-          <section style={{ textAlign: 'left', padding: '1.25rem' }}>
-            <p>
-              <span style={{ color: 'red' }}>Sorry! This location couldn't be saved.</span><br/><br/>Please check the requirements below and try again.
-            </p>
-            <ul>
-              <li>
-                <b>Name</b> must have at least one character.
-              </li>
-              <li>
-                <b>Latitude</b> must be a number between -90 & 90 (inclusive).
-              </li>
-              <li>
-                <b>Longitude</b> must be a number between -180 & 180 degrees (inclusive).
-              </li>
-            </ul>
-          </section>
+            <section className="error-container">
+              <p className="error-heading">Sorry! This marker couldn't be saved.
+              </p>
+              <p>Please make sure that the name and coordinates meet the requirements below:
+              </p>
+              <ul>
+                <li><b>Name</b> must have at least one character.</li>
+                <li><b>Latitude</b> must be a number between -90 & 90 (inclusive), no special characters, symbols or letters.</li>
+                <li><b>Longitude</b> must be a number between -180 & 180 degrees (inclusive), no special characters, symbols or letters.</li>
+              </ul>
+            </section>
           }
         </form>
     );
