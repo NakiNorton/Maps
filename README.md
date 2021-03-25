@@ -11,7 +11,7 @@ Stephanie Norton: [GitHub](https://github.com/NakiNorton) | [LinkedIn](https://w
 1. Clone this repository to your local machine
 2. CD into this repo's directory
 3. Run npm install
-4. Run npm dev to start server
+4. Run npm run dev to start server
 5. Run npm start
 6. In your browser navigate to localhost:3000 (or whichever port is provided)<br><br> 
 
