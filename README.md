@@ -25,18 +25,21 @@ Stephanie Norton: [GitHub](https://github.com/NakiNorton) | [LinkedIn](https://w
 
 ### Project in Action<br><br>
 
-#### A user adding a new marker; first successfully and then unsuccessfully, rendering the error message.
-<img src ='readme-assets/concept-adding_error.gif' width=740><br><br>   
+#### Adding a new marker unsuccessfully (missing name value), rendering the error message.
+<img src ='readme-assets/concept-error.gif' width=740><br><br>   
 
+#### Adding a new marker and re-centering map.
+<img src ='readme-assets/concept-add.gif' width=740><br><br>   
 
-
-#### A user connecting markers to create a polygon.
+#### Connecting markers to create a polygon.
 <img src ='readme-assets/concept-polygon.gif' width=740><br><br>   
 
 
 ### Future iterations
-- Add tests
-- Host the application<br><br> 
+- Improve the error message, make it specific as to what caused the error.
+- Clear the form input fields after successful submission.
+- Add tests w. React Testing Library, Jest, Redux mock store.
+- Host the application. 
 
 
 
