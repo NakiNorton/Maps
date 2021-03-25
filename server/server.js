@@ -41,10 +41,11 @@ app.get('/polygon-coordinates', (req, res) => res.send({ polygonMarkers: app.loc
 
 // POST helper function
 const verifyLocationData = (newLocation) => {
-  const isNameValid = (newLocation.length >= 1)
+  const isNameValid = newLocation.name.length > 0
   const isLatValid = (newLocation.lat !== '') && isFinite(newLocation.lat) && Math.abs(newLocation.lat) <= 90
   const isLngValid = (newLocation.lng !== '') && isFinite(newLocation.lng) && Math.abs(newLocation.lng) <= 180;
 
+  console.log(isNameValid, isLatValid, isLngValid)
   if (isNameValid && isLatValid && isLngValid) {
     return true
   } else {

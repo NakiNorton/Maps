@@ -8,11 +8,12 @@ This repo adds new features to a boilerplate app setup with React and Redux on t
 Stephanie Norton: [GitHub](https://github.com/NakiNorton) | [LinkedIn](https://www.linkedin.com/in/stephanie-norton-12888453/)<br><br> 
 
 ### Setup
-1. Clone this repository to your local machine.
-2. CD into this repo's directory.
-3. Run npm install.
-4. Run npm start (start both client and server sides).
-5. In your browser navigate to localhost:3000 (or whichever port is provided)<br><br> 
+1. Clone this repository to your local machine
+2. CD into this repo's directory
+3. Run npm install
+4. Run npm dev to start server
+5. Run npm start
+6. In your browser navigate to localhost:3000 (or whichever port is provided)<br><br> 
 
 
 ### Added Features
