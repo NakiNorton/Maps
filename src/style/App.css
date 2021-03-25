@@ -44,5 +44,25 @@ input {
   z-index: 999;
   height: 100%;
   padding-top: 65px;
-  background-color: rgba(175, 175, 175, 0.5);
+  background-color: rgba(216, 213, 213, 0.5);
+}
+
+ul {
+  padding-left: 1rem;
+}
+
+li {
+  padding: .5rem 0rem;
+}
+
+.error-container {
+  margin-top: 2rem;
+  text-align: left;
+  padding: 1.25rem; 
+  background-color: rgba(228, 222, 222, 0.5);
+}
+
+.error-heading {
+  color: red; 
+  font-size: 18px;
 }
