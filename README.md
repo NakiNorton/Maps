@@ -1,4 +1,4 @@
-# Concept3D Interview : The Technical Challenge
+# Concept3D: The Technical Challenge
 
 ### Overview
 This repo adds new features to a boilerplate app setup with React and Redux on the Front-End, and an Express API on the Back-End. I used a GitHub [project board](https://github.com/NakiNorton/frontendchallenge/projects/1) to help manage my tasks and stay organized.
